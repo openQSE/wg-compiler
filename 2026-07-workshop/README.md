@@ -2,11 +2,11 @@
 
 *Draft for co-lead review — Josh Moles*
 
-Proposing: Compiler ↔ QRMI contract spec + reference adapter producing correct lowered output for one compiler/backend pair (performance parity out of scope) as our 6-month deliverable. Ideally a second compiler stack cross-validates. Workshop paper co-developed alongside.
+Proposing: Compiler ↔ QDMI contract spec + reference adapter producing correct lowered output for one compiler/backend pair (performance parity out of scope) as our 6-month deliverable. Ideally a second compiler stack cross-validates. Workshop paper co-developed alongside.
 
-*Reference adapter:* code within an existing compiler stack that consumes QRMI target descriptions and uses them to drive lowering.
+*Reference adapter:* code within an existing compiler stack that consumes QDMI target descriptions and uses them to drive lowering.
 
-Input wanted: Right primary deliverable? Challenges and breakout structure? 6-month timeline given QRMI dependency? Which compiler stack each of us can implement against?
+Input wanted: Right primary deliverable? Challenges and breakout structure? 6-month timeline given QDMI dependency? Which compiler stack each of us can implement against?
 
 ## Workstream Overview
 
@@ -20,12 +20,13 @@ Input wanted: Right primary deliverable? Challenges and breakout structure? 6-mo
 What is this workstream responsible for?
 
 - In-scope:
-  - Compiler ↔ QRMI/QDMI contract definition
+  - Compiler ↔ QDMI contract definition
   - Reference adapter in at least one compiler stack
   - Lowering pipeline integration with the contract
   - Cross-vendor portability validation
 - Out-of-scope:
-  - Hardware interface (QRMI workstream)
+  - Device interface itself (QDMI workstream)
+  - Resource management / submission semantics (QRMI is the downstream interface; not v0.1)
   - Runtime/orchestration (Software Architecture workstream)
   - SDK design
   - Performance optimization through the contract
@@ -33,7 +34,7 @@ What is this workstream responsible for?
 
 Key problems this workstream aims to address:
 
-- Compiler ↔ QRMI contract undefined
+- Compiler ↔ QDMI contract undefined
 - No reference implementation proving a vendor-neutral contract is viable
 - No portable pass interface (deferred)
 
@@ -44,7 +45,7 @@ How does this workstream contribute to the overall OpenQSE mission?
 - Contribution to:
   - Interoperability: Working contract + adapter shows compilers can consume target descriptions from a vendor-neutral source
   - Vendor-neutral interfaces: Contract is the interface; cross-vendor implementations validate it
-  - HPC–QC integration: The compiler ↔ QRMI seam is where target-aware compilation meets resource management
+  - HPC–QC integration: The compiler ↔ QDMI seam is where target-aware compilation meets vendor-neutral device descriptions
 
 ## Session Structure (Day-of Plan)
 
@@ -91,7 +92,7 @@ How does this workstream contribute to the overall OpenQSE mission?
 - Key questions:
   - Minimum target description for correct lowering?
   - How are vendor-specific capabilities exposed without breaking portability?
-  - Querying QRMI vs. embedding hardware knowledge?
+  - Querying QDMI vs. embedding hardware knowledge?
   - What does the contract explicitly *not* carry?
 
 **Challenge 3: IR landscape and follow-on directions (breakout, 90 min)**
@@ -120,15 +121,15 @@ Each workstream must produce:
 
 ### A. Key Gaps Identified (locked at event)
 
-- Gap 1: No defined compiler ↔ QRMI/QDMI contract
+- Gap 1: No defined compiler ↔ QDMI contract
 - Gap 2: No reference implementation proving vendor-neutral contract is viable
 - Gap 3: No cross-vendor compiler portability path
 
 ### B. Proposed Interfaces / Specifications (if applicable)
 
-- Interface / API candidate: Compiler ↔ QRMI target description contract (v0.1)
+- Interface / API candidate: Compiler ↔ QDMI target description contract (v0.1)
 - Scope: Correct lowering across vendors; performance parity out of scope
-- Dependencies: QRMI v0.1 stable by ~September 2026
+- Dependencies: QDMI v0.1 stable by ~September 2026
 
 ### C. Milestones (Next 6 Months)
 
@@ -136,7 +137,7 @@ Each workstream must produce:
 
 - Description: Contract scope locked; compiler stacks chosen; paper outline drafted
 - Timeline: Late August 2026
-- Owner(s): Leads + QRMI co-leads
+- Owner(s): Leads + QDMI co-leads
 
 **Milestone 2:**
 
@@ -168,7 +169,7 @@ Each workstream must produce:
 
 Committed for the 6-month window:
 
-- Compiler ↔ QRMI contract spec (v0.1)
+- Compiler ↔ QDMI contract spec (v0.1)
 - Reference adapter in at least one compiler stack
 - Cross-validation: second compiler stack implementing the same contract
 - Workshop paper documenting spec + implementations
@@ -182,23 +183,23 @@ Deferred to follow-on effort:
 
 ## Implementation & Validation Considerations
 
-- Existing efforts to leverage: QRMI v0.1; QIR Alliance; OpenQASM 3; MLIR dialects (Catalyst, CUDA-Q NVQ++, MQT Core); IonQ, ORNL, HPE compiler stacks; Genesis
+- Existing efforts to leverage: QDMI v0.1; QIR Alliance; OpenQASM 3; MLIR dialects (Catalyst, CUDA-Q NVQ++, MQT Core); IonQ, ORNL, HPE compiler stacks; Genesis
 - Potential contributors (vendors / labs): IonQ, ORNL, HPE; cross-validation candidates include NVIDIA (CUDA-Q), Xanadu (Catalyst), TUM/MQV (MQT Core), Quantinuum (TKET) — commitments solicited at the event
 - Validation approach:
   - Reference adapter producing correct lowered output
   - Cross-vendor implementation in a second compiler stack
-  - Integration demo with QRMI's reference implementation if available
+  - Integration demo with QDMI's reference implementation if available
 
 ## Dependencies & Interfaces with Other Workstreams
 
-- Depends on: QRMI v0.1 stable by ~September 2026 (hard dependency)
-- Provides to: QRMI (compiler-side validation); Software Architecture (working compiler integration)
-- Required coordination: Pre-event sync with QRMI leads (Park, Schulz, Naughton) by June 14; ongoing through M1–M3
+- Depends on: QDMI v0.1 stable by ~September 2026 (hard dependency)
+- Provides to: QDMI (compiler-side validation); Software Architecture (working compiler integration)
+- Required coordination: Pre-event sync with QDMI leads (Park, Schulz, Naughton) by June 14; ongoing through M1–M3
 
 ## Pre-Event Preparation Checklist
 
 - [ ] Co-lead alignment on direction
-- [ ] QRMI pre-meeting completed
+- [ ] QDMI pre-meeting completed
 - [ ] Intro slides drafted
 - [ ] Pre-read shared (Shehata paper + challenge briefs)
 - [ ] Participants identified
@@ -207,7 +208,7 @@ Deferred to follow-on effort:
 ## Notes / Open Questions
 
 - Authorship norms for spec + paper — sorted early M1
-- QRMI dependency: if v0.1 slips past September, timeline compresses
+- QDMI dependency: if v0.1 slips past September, timeline compresses
 - SC26 panel: spec + implementation could anchor narrative
 - Reference adapter scope (correctness, not performance parity) stated explicitly in spec to manage vendor expectations
 
