@@ -15,6 +15,9 @@
 - Do users need to specify specific compilation passes as part of their applications? How much compilation pipeline configurability should be exposed to users vs kept as curated presets?
 - Should the scope include FTQC/QEC?
 
+(Homework from other groups)
+- resource management / interfaces, wants to know the type of data the compiler will need from the device
+
 ## Draft IR Selection Criteria
 
 Note, whether the group should select a common IR as the compiler middle layer is an open question. (This would be MLIR dialects if using MLIR)
@@ -32,10 +35,16 @@ If selecting an IR, here are some criterion:
 
 Note that in FTQC efforts it's likely that multiple IRs will be needed.
 
-## dapters and Translation Model
+## Adapters and Translation Model
 - Is one adapter per SDK the intended baseline, and who should own adapter development (OpenQSE, vendors, or hybrid via common interchange export)?
 - Can adapter count/maintenance be reduced further without shifting complexity elsewhere?
 - Is round-trip flow through SDK representations (SDK -> IR -> SDK) a core requirement or only a special-case need?
+
+Resources about MLIR and OpenQASM (related to Qiskit -> MLIR -> Qiskit
+patterns)
+ * https://github.com/openqasm/qe-compiler has an OpenQASM 3 MLIR dialect
+ * https://github.com/Munich-Quantum-Software-Stack/MQSS-Quantum-Compilation-Suite/blob/develop/lib/Passes/CodeGen/QASM3ToQuake.cpp
+   MQSS has an OpenQASM parser into Quake
 
 ## Passes, Pipeline Design, and Testing
 - What pass categories are in scope (translation, optimization, FTQC-specific lowering, algorithm-specific)?
