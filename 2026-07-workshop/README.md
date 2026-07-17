@@ -1,5 +1,7 @@
 # Compiler Infrastructure Workstream — OpenQSE Day, July 24, 2026
 
+Moved back to Confluence: https://openqse.atlassian.net/wiki/spaces/Events/pages/45776923/Compiler+Infrastructure
+
 *Draft for co-lead review — Josh Moles*
 
 Proposing: Compiler ↔ QDMI contract spec + reference adapter producing correct lowered output for one compiler/backend pair (performance parity out of scope) as our 6-month deliverable. Ideally a second compiler stack cross-validates. Workshop paper co-developed alongside.
